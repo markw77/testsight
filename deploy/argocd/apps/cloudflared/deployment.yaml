@@ -30,15 +30,5 @@ spec:
             limits:
               cpu: "100m"
               memory: "64Mi"
-          livenessProbe:
-            httpGet:
-              path: /ready
-              port: 20241
-            initialDelaySeconds: 10
-            periodSeconds: 30
-          readinessProbe:
-            httpGet:
-              path: /ready
-              port: 20241
-            initialDelaySeconds: 5
-            periodSeconds: 10
+          # Quick tunnels are ephemeral; probes not reliable. Cloudflare manages
+          # tunnel health externally. Restart on failure is expected behavior.
