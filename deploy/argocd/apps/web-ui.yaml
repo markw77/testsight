@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-ui
+  namespace: argocd
+spec:
+  project: testsight
+  source:
+    repoURL: https://github.com/markw77/testsight.git
+    targetRevision: main
+    path: deploy/argocd/apps/web-ui
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: testsight-system
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
