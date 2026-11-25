@@ -21,8 +21,17 @@ spec:
           args:
             - tunnel
             - --no-autoupdate
+            - run
+            - --token
+            - $(TUNNEL_TOKEN)
             - --url
             - http://web-ui.testsight-system.svc.cluster.local:80
+          env:
+            - name: TUNNEL_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: cloudflare-tunnel-token
+                  key: token
           resources:
             requests:
               cpu: "10m"
@@ -32,3 +41,4 @@ spec:
               memory: "64Mi"
           # Quick tunnels are ephemeral; probes not reliable. Cloudflare manages
           # tunnel health externally. Restart on failure is expected behavior.
+          
