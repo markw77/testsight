@@ -24,8 +24,6 @@ spec:
             - run
             - --token
             - $(TUNNEL_TOKEN)
-            - --url
-            - http://web-ui.testsight-system.svc.cluster.local:80
           env:
             - name: TUNNEL_TOKEN
               valueFrom:
@@ -39,6 +37,3 @@ spec:
             limits:
               cpu: "100m"
               memory: "64Mi"
-          # Quick tunnels are ephemeral; probes not reliable. Cloudflare manages
-          # tunnel health externally. Restart on failure is expected behavior.
-          
