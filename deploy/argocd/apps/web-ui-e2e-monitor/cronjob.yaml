@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: web-ui-e2e-monitor
+  namespace: testsight-system
+  labels:
+    app: web-ui-e2e-monitor
+spec:
+  schedule: "* * * * *"
+  concurrencyPolicy: Forbid
+  startingDeadlineSeconds: 60
+  ttlSecondsAfterFinished: 60
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: monitor
+              image: curlimages/curl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  CODE=$(curl -s -o /dev/null -w "%{http_code}" https://web-ui.testsight.dev --connect-timeout 10)
+                  echo "$(date -u) e2e web-ui.testsight.dev: HTTP $CODE"
+                  if [ "$CODE" != "200" ]; then
+                    echo "ALERT: e2e check failed with $CODE"
+                    exit 1
+                  fi
+          restartPolicy: OnFailure
