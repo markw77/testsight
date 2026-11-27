@@ -9,7 +9,6 @@ spec:
   schedule: "* * * * *"
   concurrencyPolicy: Forbid
   startingDeadlineSeconds: 60
-  ttlSecondsAfterFinished: 60
   jobTemplate:
     spec:
       template:
