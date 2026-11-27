@@ -1,0 +1,9 @@
+# Kubernetes
+*.kubeconfig
+kubeconfig
+kubeconfig-*
+
+# Python
+.venv/
+__pycache__/
+*.pyc
