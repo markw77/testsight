@@ -51,3 +51,11 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 10
             failureThreshold: 3
+      dnsPolicy: None
+      dnsConfig:
+        nameservers:
+          - 10.43.0.10
+        searches:
+          - testsight-system.svc.cluster.local
+          - svc.cluster.local
+          - cluster.local
