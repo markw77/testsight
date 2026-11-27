@@ -26,4 +26,4 @@ spec:
                     echo "ALERT: e2e check failed with $CODE"
                     exit 1
                   fi
-          restartPolicy: OnFailure
+          restartPolicy: Never
